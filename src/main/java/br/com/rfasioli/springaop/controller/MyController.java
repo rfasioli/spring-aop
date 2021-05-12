@@ -1,12 +1,17 @@
 package br.com.rfasioli.springaop.controller;
 
-import br.com.rfasioli.springaop.service.MyService;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@RequestMapping("/")
+import br.com.rfasioli.springaop.aspect.IOActions;
+import br.com.rfasioli.springaop.service.MyService;
+
+@RestController
+@RequestMapping(path = "/")
 public class MyController {
 
     private final MyService myService;
@@ -17,7 +22,15 @@ public class MyController {
 
     @GetMapping("")
     public String hello() {
-        myService.serve();
-        return "Hello!";
+        return myService
+                .serve("Teste")
+                .toString();
     }
+
+    @IOActions(args = {"0"})
+    @PostMapping("")
+    public String save(@RequestBody final String payload) {
+        return "Hello";
+    }
+
 }

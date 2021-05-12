@@ -12,11 +12,10 @@ public class MyService {
     public MyService() {
     }
 
-    @IOActions
-    public Sample serve() {
+    public Sample serve(String inputName) {
         return Sample.newBuilder()
                 .withUuid(UUID.randomUUID())
-                .withName("ObjectName")
+                .withName(inputName)
                 .withScore(9.8)
                 .withDescription("This is a sample domain object")
                 .build();

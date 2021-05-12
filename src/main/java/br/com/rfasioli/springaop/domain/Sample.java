@@ -1,5 +1,7 @@
 package br.com.rfasioli.springaop.domain;
 
+import org.springframework.context.annotation.Bean;
+
 import br.com.rfasioli.springaop.aspect.SelfValidate;
 
 import java.util.UUID;
@@ -16,6 +18,10 @@ public class Sample {
         name = builder.name;
         description = builder.description;
         score = builder.score;
+        this.validate();
+    }
+
+    public void validate() {
     }
 
     public static Builder newBuilder() {
@@ -47,6 +53,15 @@ public class Sample {
         return score;
     }
 
+    @Override
+    public String toString() {
+        return "Sample{" +
+                "uuid=" + uuid +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", score=" + score +
+                '}';
+    }
 
     public static final class Builder {
         private UUID uuid;
